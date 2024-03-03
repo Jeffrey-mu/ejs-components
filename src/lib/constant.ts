@@ -8,3 +8,4 @@ export const appConfig: Config = {
 export const header = {
   Authorization: "113Bmongojsdalkfnxcvmas",
 };
+export const api = process.env.NODE_ENV !== 'development' ? 'http://47.104.212.164:3000/' : '/api'

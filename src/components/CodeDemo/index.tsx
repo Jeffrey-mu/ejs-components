@@ -123,7 +123,7 @@ export default function App({ compData }: { compData: CompDataType }) {
           );
         })}
       </Tabs>
-      <div className="w-1/2">
+      <div className="w-1/2 p-3">
         <RenderHtml html={compData.html} />
       </div>
     </Card>

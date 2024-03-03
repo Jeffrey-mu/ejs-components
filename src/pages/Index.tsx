@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { header as headers } from "@/lib/constant";
+import { api, header as headers } from "@/lib/constant";
 import CodeDemo, { CompDataType } from "@/components/CodeDemo";
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([]);
   useEffect(() => {
-    fetch("/api/componentsList", {
+    fetch(api + "/componentsList", {
       method: "get",
       headers,
     })
