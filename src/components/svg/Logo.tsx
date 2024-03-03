@@ -2,8 +2,8 @@ export default function App() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1.5em"
-      height="1.5em"
+      width="2.5em"
+      height="2.5em"
       viewBox="0 0 32 32"
     >
       <path
