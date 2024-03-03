@@ -2,5 +2,9 @@ interface Config {
   siteName: string;
 }
 export const appConfig: Config = {
-  siteName: "File verification",
+  siteName: "Ejs Components",
 };
+
+export const header = {
+  Authorization: "113Bmongojsdalkfnxcvmas"
+}
