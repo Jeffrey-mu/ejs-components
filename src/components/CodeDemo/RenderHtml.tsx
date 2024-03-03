@@ -25,8 +25,24 @@ export default function App({ html }: { html: string }) {
     <body>
     ${html}
     </body>
-    </html>`
+    </html>`;
   }
-  return <div dangerouslySetInnerHTML={{ __html: html.replace('data-src', 'src').replace('<a ', '<a onClick="event.preventDefault();" ') }} />
-  return <iframe srcDoc={renderHtml(html.replace('data-src', 'src').replace('<a ', '<a onClick="event.preventDefault();" '))}></iframe>
+  return (
+    <div
+      dangerouslySetInnerHTML={{
+        __html: html
+          .replace("data-src", "src")
+          .replace("<a ", '<a onClick="event.preventDefault();" '),
+      }}
+    />
+  );
+  return (
+    <iframe
+      srcDoc={renderHtml(
+        html
+          .replace("data-src", "src")
+          .replace("<a ", '<a onClick="event.preventDefault();" '),
+      )}
+    ></iframe>
+  );
 }

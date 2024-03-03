@@ -6,5 +6,5 @@ export const appConfig: Config = {
 };
 
 export const header = {
-  Authorization: "113Bmongojsdalkfnxcvmas"
-}
+  Authorization: "113Bmongojsdalkfnxcvmas",
+};

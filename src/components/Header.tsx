@@ -18,7 +18,9 @@ export default function App() {
       <NavbarBrand>
         <NavLink to="/" className="flex gap-2">
           <Logo />
-          <p className="font-bold text-inherit">{appConfig.siteName}</p>
+          <p className="self-center text-2xl font-semibold whitespace-nowrap className">
+            {appConfig.siteName}
+          </p>
         </NavLink>
       </NavbarBrand>
 

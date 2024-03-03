@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { header as headers } from '@/lib/constant'
-import CodeDemo, { CompDataType } from '@/components/CodeDemo'
+import { header as headers } from "@/lib/constant";
+import CodeDemo, { CompDataType } from "@/components/CodeDemo";
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([]);
   useEffect(() => {
     fetch("/api/componentsList", {
       method: "get",
-      headers
+      headers,
     })
       .then((res) => {
         return res.json();
@@ -20,16 +20,13 @@ export default function App() {
         console.log(err);
         setList([]);
       });
-
-  }, [])
+  }, []);
 
   return (
     <div>
-      {
-        list.map(item => {
-          return <CodeDemo compData={item} />
-        })
-      }
+      {list.map((item) => {
+        return <CodeDemo compData={item} />;
+      })}
     </div>
   );
 }
