@@ -5,7 +5,7 @@ import Layout from "./components/Layout";
 
 function App() {
   return (
-    <div className="App font-sans">
+    <div className="App font-sans bg-slate-100 dark:bg-transparent">
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
