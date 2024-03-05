@@ -5,6 +5,7 @@ import { okaidia } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useState } from "react";
 import RenderHtml from "./RenderHtml";
 import { copyText } from "@/lib/utils";
+import clsx from "clsx";
 export type CompDataType = {
   ejs: string;
   html: string;
@@ -43,9 +44,9 @@ export default function App({ compData }: { compData: CompDataType }) {
   }
   return (
     <Card className="flex w-full flex-col p-3 CodeDemo mb-3">
-      <h2 className="py-2 text-xl font-bold">{compData.info.name}</h2>
+
       <Tabs
-        className="my-2"
+        className="my-2 flex justify-end"
         aria-label="Options"
         onSelectionChange={() => {
           setCopyState(false);
@@ -59,8 +60,10 @@ export default function App({ compData }: { compData: CompDataType }) {
             <Tab key={item} title={item}>
               <Card>
                 <CardBody>
-                  <div className="flex justify-end cursor-pointer">
+                  <div className="flex justify-between cursor-pointer">
+                    <h2 className="py-2 text-xl font-bold">{compData.info.name}</h2>
                     <span onClick={copy.bind(null, compData[item])}>
+
                       {copyState ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -107,24 +110,28 @@ export default function App({ compData }: { compData: CompDataType }) {
                       )}
                     </span>
                   </div>
-                  <SyntaxHighlighter
+                 <div className="w-full">
+                 <SyntaxHighlighter
                     language="ejs"
                     style={okaidia}
+                    wrapLines={true}
                     customStyle={{ padding: 20 }}
                     showLineNumbers
-                    wrapLines
                     languageCustomSyntax={ejsSyntax}
                   >
                     {compData[item]}
                   </SyntaxHighlighter>
+                 </div>
                 </CardBody>
               </Card>
             </Tab>
           );
         })}
       </Tabs>
-      <div className="w-1/2 p-3">
-        <RenderHtml html={compData.html} />
+      <div className='flex justify-center items-center'>
+        <div className={clsx([compData.info.type === 'card' ? 'w-96' : 'w-full',])}>
+          <RenderHtml html={compData.html} />
+        </div>
       </div>
     </Card>
   );
