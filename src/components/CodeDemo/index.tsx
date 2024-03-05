@@ -6,6 +6,8 @@ import { useState } from "react";
 import RenderHtml from "./RenderHtml";
 import { copyText } from "@/lib/utils";
 import clsx from "clsx";
+import Copy from "@/components/svg/Copy";
+import CopySuccess from "@/components/svg/CopySuccess";
 export type CompDataType = {
   ejs: string;
   html: string;
@@ -43,8 +45,10 @@ export default function App({ compData }: { compData: CompDataType }) {
     }, 2000);
   }
   return (
-    <Card className="flex w-full flex-col p-3 CodeDemo mb-3">
-
+    <Card
+      className="flex w-full flex-col p-3 CodeDemo mb-3"
+      id={compData.info.name}
+    >
       <Tabs
         className="my-2 flex justify-end"
         aria-label="Options"
@@ -61,75 +65,35 @@ export default function App({ compData }: { compData: CompDataType }) {
               <Card>
                 <CardBody>
                   <div className="flex justify-between cursor-pointer">
-                    <h2 className="py-2 text-xl font-bold">{compData.info.name}</h2>
+                    <h2 className="py-2 text-xl font-bold">
+                      {compData.info.name}
+                    </h2>
                     <span onClick={copy.bind(null, compData[item])}>
-
-                      {copyState ? (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1.2em"
-                          height="1.2em"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            fill="none"
-                            stroke="green"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                          >
-                            <path d="m12 15l2 2l4-4" />
-                            <rect
-                              width="14"
-                              height="14"
-                              x="8"
-                              y="8"
-                              rx="2"
-                              ry="2"
-                            />
-                            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
-                          </g>
-                        </svg>
-                      ) : (
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="1.2em"
-                          height="1.2em"
-                          viewBox="0 0 24 24"
-                        >
-                          <g
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-linecap="round"
-                            stroke-width="1.5"
-                          >
-                            <path d="M20.998 10c-.012-2.175-.108-3.353-.877-4.121C19.243 5 17.828 5 15 5h-3c-2.828 0-4.243 0-5.121.879C6 6.757 6 8.172 6 11v5c0 2.828 0 4.243.879 5.121C7.757 22 9.172 22 12 22h3c2.828 0 4.243 0 5.121-.879C21 20.243 21 18.828 21 16v-1" />
-                            <path d="M3 10v6a3 3 0 0 0 3 3M18 5a3 3 0 0 0-3-3h-4C7.229 2 5.343 2 4.172 3.172C3.518 3.825 3.229 4.7 3.102 6" />
-                          </g>
-                        </svg>
-                      )}
+                      {copyState ? <Copy /> : <CopySuccess />}
                     </span>
                   </div>
-                 <div className="w-full">
-                 <SyntaxHighlighter
-                    language="ejs"
-                    style={okaidia}
-                    wrapLines={true}
-                    customStyle={{ padding: 20 }}
-                    showLineNumbers
-                    languageCustomSyntax={ejsSyntax}
-                  >
-                    {compData[item]}
-                  </SyntaxHighlighter>
-                 </div>
+                  <div className="w-full">
+                    <SyntaxHighlighter
+                      language="ejs"
+                      style={okaidia}
+                      wrapLines={true}
+                      customStyle={{ padding: 20 }}
+                      showLineNumbers
+                      languageCustomSyntax={ejsSyntax}
+                    >
+                      {compData[item]}
+                    </SyntaxHighlighter>
+                  </div>
                 </CardBody>
               </Card>
             </Tab>
           );
         })}
       </Tabs>
-      <div className='flex justify-center items-center'>
-        <div className={clsx([compData.info.type === 'card' ? 'w-96' : 'w-full',])}>
+      <div className="flex justify-center items-center">
+        <div
+          className={clsx([compData.info.type === "card" ? "w-96" : "w-full"])}
+        >
           <RenderHtml html={compData.html} />
         </div>
       </div>
