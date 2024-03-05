@@ -1,0 +1,36 @@
+.max_width {
+  width: min(1536px, 100% - 30px);
+  margin-inline: auto;
+}
+
+.header {
+  .max_width {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.container {
+  padding: 10px;
+  flex: 1;
+  margin: 15px auto;
+  min-height: calc(100vh - (64px + 180px));
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
