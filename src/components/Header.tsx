@@ -16,9 +16,9 @@ export default function App() {
   return (
     <Navbar isBordered maxWidth="2xl">
       <NavbarBrand>
-        <NavLink to="/" className="flex gap-2">
+        <NavLink to="/" className="flex gap-2 text-orange-600">
           <Logo />
-          <p className="self-center text-2xl font-semibold whitespace-nowrap className">
+          <p className="self-center text-2xl whitespace-nowrap className">
             {appConfig.siteName}
           </p>
         </NavLink>
@@ -36,7 +36,7 @@ export default function App() {
               color="secondary"
               name="Jason Hughes"
               size="sm"
-              src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+              src="https://image.jiafengfmc.cn/file/39b413a7c5baf7f843e38.png"
             />
           </DropdownTrigger>
           <DropdownMenu aria-label="Profile Actions" variant="flat">
