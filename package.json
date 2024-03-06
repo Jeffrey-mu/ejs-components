@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dep": "npm run build && npm run rl",
     "build": "tsc && vite build",
     "rl": "node scripts/release.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
