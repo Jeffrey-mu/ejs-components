@@ -19,7 +19,7 @@ export default function App({
   }
   return (
     <div className="sticky top-[89px]">
-      <ul className="h-full text-foreground box-border bg-content1 outline-none shadow-medium rounded-large transition-transform-background flex w-full flex-col p-3 CodeDemo mb-3 gap-3 text-gray-700 dark:text-gray-200">
+      <ul className="h-full box-border bg-content1 outline-none shadow-medium rounded-large transition-transform-background flex w-full flex-col p-3 CodeDemo mb-3 gap-3 text-yellow-800">
         <li className="text-xl font-bold">Components</li>
         {tabs.map((item) => {
           return (
