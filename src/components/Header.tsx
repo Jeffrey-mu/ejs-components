@@ -9,7 +9,7 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import Logo from "./svg/Logo";
-import ThemeToggle from "./ThemeToggle";
+// import ThemeToggle from "./ThemeToggle";
 import { appConfig } from "@/lib/constant";
 import { NavLink } from "react-router-dom";
 export default function App() {
@@ -28,7 +28,7 @@ export default function App() {
       </NavbarBrand>
 
       <NavbarContent as="div" justify="end">
-        <ThemeToggle />
+        {/* <ThemeToggle /> */}
 
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
