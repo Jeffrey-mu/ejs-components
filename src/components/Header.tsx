@@ -16,9 +16,12 @@ export default function App() {
   return (
     <Navbar isBordered maxWidth="2xl">
       <NavbarBrand>
-        <NavLink to="/" className="flex gap-2 text-orange-600">
+        <NavLink
+          to="/"
+          className="flex gap-2 self-center text-orange-600 font-semibold whitespace-nowrap"
+        >
           <Logo />
-          <p className="self-center text-2xl whitespace-nowrap className">
+          <p className="self-center text-2xl whitespace-nowrap">
             {appConfig.siteName}
           </p>
         </NavLink>

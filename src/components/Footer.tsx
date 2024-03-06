@@ -12,7 +12,7 @@ export default function Footer() {
                 className="flex gap-2 items-center "
               >
                 <Logo />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap className">
+                <span className="self-center text-2xl text-orange-600 font-semibold whitespace-nowrap className">
                   {appConfig.siteName}
                 </span>
               </a>
