@@ -1,11 +1,12 @@
 {
-  "name": "vite-project",
+  "name": "EJS & HTML",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "rl": "node scripts/release.js",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write ."
@@ -17,8 +18,11 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "ali-oss": "^6.20.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "consola": "^3.2.3",
+    "fast-glob": "^3.3.2",
     "framer-motion": "^11.0.3",
     "lucide-react": "^0.314.0",
     "next-themes": "^0.2.1",
