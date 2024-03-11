@@ -5,6 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import RenderHtml from "@/components/CodeDemo/RenderHtml";
 import { Card } from "@nextui-org/react";
 import ca from "clsx";
+import ArrowDown from "@/components/svg/ArrowDown";
 export const tabs = ["card", "footer", "titlebar", "layout", "header"];
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([]);
@@ -50,9 +51,12 @@ export default function App() {
             .filter((item) => item.info.type === active)
             .map((item) => (
               <Card className="p-2 cursor-pointer flex mb-3">
-                <a href={`#${item.info.name}`}>
+                <div>
+                  <a className="pl-3 underline flex items-center text-blue-600 mb-3" href={`#${item.info.name}`}>
+                    {item.info.name}  <ArrowDown rotate={"-rotate-90"} />
+                  </a>
                   <RenderHtml html={item.html} />
-                </a>
+                </div>
               </Card>
             ))}
         </section>
