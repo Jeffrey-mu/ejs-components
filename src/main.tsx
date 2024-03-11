@@ -10,7 +10,7 @@ if (domNode) {
   root.render(
     <NextUIProvider>
       {/* <NextThemesProvider attribute="class" defaultTheme="linght"> */}
-        <App />
+      <App />
       {/* </NextThemesProvider> */}
     </NextUIProvider>,
   );

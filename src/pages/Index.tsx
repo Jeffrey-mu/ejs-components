@@ -5,7 +5,7 @@ import Sidebar from "@/components/Sidebar";
 import RenderHtml from "@/components/CodeDemo/RenderHtml";
 import { Card } from "@nextui-org/react";
 import ca from "clsx";
-export const tabs = ["card", "footer"];
+export const tabs = ["card", "footer", "titlebar"];
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([]);
   const [active, setActive] = useState(tabs[0]);
