@@ -49,7 +49,7 @@ export default function App() {
           {list
             .filter((item) => item.info.type === active)
             .map((item) => (
-              <Card className="p-2 cursor-pointer flex">
+              <Card className="p-2 cursor-pointer flex mb-3">
                 <a href={`#${item.info.name}`}>
                   <RenderHtml html={item.html} />
                 </a>

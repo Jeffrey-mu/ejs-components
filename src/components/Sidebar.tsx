@@ -29,11 +29,11 @@ export default function App({
               <li onClick={handelMenu.bind(null, item)} key={item}>
                 <span
                   className={ca(
-                    `${item === active ? "text-orange-600" : ""} w-full cursor-pointer pl-4 flex text-xl hover:text-orange-600 ml-3 items-center justify-between pr-5`,
+                    `${item === active ? "text-orange-600" : ""} w-fullcursor-pointer pl-4 flex text-xl hover:text-orange-600 ml-3 items-center justify-between pr-5`,
                   )}
                 >
                   {item}
-                  <ArrowDown rotate={active === item ? "rotate-90" : ""} />
+                  <ArrowDown rotate={active === item ? "" : "rotate-90"} />
                 </span>
                 {
                   <ul
