@@ -1,17 +1,21 @@
-export default function App({ html }: { html: string }) {
+import { useState } from "react";
+import clsx from "clsx";
+export default function App({ html, mode }: { html: string, mode?: boolean }) {
+  const [width, setWidth] = useState(400)
+  const [height, setHeight] = useState(550)
   // 模拟响应式
-  // const screen = [
-  //   {
-  //     width: 765,
-  //     height: 250,
-  //     type: "mobile"
-  //   },
-  //   {
-  //     width: 768,
-  //     height: 500,
-  //     type: "pc"
-  //   }
-  // ];
+  const screen = [
+    {
+      width: 400,
+      height: 550,
+      type: "mobile"
+    },
+    {
+      width: 1024,
+      height: 700,
+      type: "pc"
+    }
+  ];
   function renderHtml(html: string) {
     return `<!DOCTYPE html>
     <html lang="en">
@@ -27,7 +31,26 @@ export default function App({ html }: { html: string }) {
     </body>
     </html>`;
   }
-  return (
+  // return;
+  return mode ? (
+    <>
+      <div>
+        screen: {
+          screen.map(item => <span>{item.type}</span>)
+        }
+      </div>
+      <div className={clsx(`w-[${width}px] h-[${height}px]`)}>
+        <iframe
+          className="h-full w-full"
+          srcDoc={renderHtml(
+            html
+              .replace("data-src", "src")
+              .replace("<a ", '<a onClick="event.preventDefault();" '),
+          )}
+        ></iframe>
+      </div>
+    </>
+  ) : (
     <div
       dangerouslySetInnerHTML={{
         __html: html
@@ -35,14 +58,5 @@ export default function App({ html }: { html: string }) {
           .replace("<a ", '<a onClick="event.preventDefault();" '),
       }}
     />
-  );
-  return (
-    <iframe
-      srcDoc={renderHtml(
-        html
-          .replace("data-src", "src")
-          .replace("<a ", '<a onClick="event.preventDefault();" '),
-      )}
-    ></iframe>
   );
 }

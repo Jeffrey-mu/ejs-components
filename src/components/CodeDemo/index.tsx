@@ -90,12 +90,10 @@ export default function App({ compData }: { compData: CompDataType }) {
           );
         })}
       </Tabs>
-      <div className="flex justify-center items-center p-4">
-        <div
-          className={clsx([compData.info.type === "card" ? "w-96" : "w-full"])}
-        >
-          <RenderHtml html={compData.html} />
-        </div>
+      <div
+        className={clsx([compData.info.type === "card" ? "w-full" : "w-full", 'p-4'])}
+      >
+        <RenderHtml html={compData.html} mode={true} />
       </div>
     </Card>
   );
