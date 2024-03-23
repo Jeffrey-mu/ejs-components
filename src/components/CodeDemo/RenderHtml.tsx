@@ -82,7 +82,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4006584_j5f79uup7rj.css">
       <script src="https://cdn.tailwindcss.com"></script>
-      <title>Document</title>
+      <title>ejs & html</title>
     </head>
     <body>
     ${html}
@@ -94,13 +94,13 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
     ? (
       <>
         <Card ref={ref}>
-          <div className="flex gap-3 bg-slate-700 justify-between items-center mb-2 p-4 text-white">
+          <div className="flex gap-3 bg-slate-200 justify-between items-center mb-2 p-4">
             <div className="flex items-center gap-5 text-center">
               {screen.map(item => (
                 <div
                   key={item.type}
                   className={clsx(
-                    `cursor-pointer ${width === item.width ? 'text-orange-400' : ''} icon-hover `,
+                    `cursor-pointer ${width === item.width ? 'text-slate-400' : ''} icon-hover `,
                   )}
                   onClick={switchDevice.bind(null, item.type)}
                 >
@@ -112,6 +112,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
             <div className="flex gap-3">
               <Button
                 size="sm"
+                color="primary"
                 variant="faded"
                 onClick={() => toggle()}
                 className={clsx(
@@ -125,6 +126,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
               </Button>
               <Button
                 size="sm"
+                color="primary"
                 variant="faded"
                 onClick={setShowEdit.bind(null, !showEdit)}
                 className={clsx(
@@ -137,6 +139,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
               <Button
                 isIconOnly
                 size="sm"
+                color="primary"
                 variant="faded"
                 onClick={copyToClipboard.bind(null, innerHtml)}
                 className={clsx(
