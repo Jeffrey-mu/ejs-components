@@ -72,8 +72,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(tailwindcss@3.4.1)
   upload-files-to-oss:
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.0.9
+    version: 0.0.9
   vaul:
     specifier: ^0.8.9
     version: 0.8.9(@types/react-dom@18.2.18)(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -7664,8 +7664,8 @@ packages:
       picocolors: 1.0.0
     dev: true
 
-  /upload-files-to-oss@0.0.8:
-    resolution: {integrity: sha512-8MPb6u8JoPKfs23GyyFJfAUU4ZJQvt/l6fsiqzPT4KAsSgbSafhf//6dGFJ3poJkxCB66vj8yZFApRv0sWhLgw==}
+  /upload-files-to-oss@0.0.9:
+    resolution: {integrity: sha512-y1eqbTMDb5NNYXEPUoHzZRL80Vq6NbdQCy5/Xjs9VIJW7fOtwnOOI+V11jQcXcegsefUrEWy7yA5RAsMO8GoYg==}
     dependencies:
       '@types/ali-oss': 6.16.11
       '@types/async': 3.2.24

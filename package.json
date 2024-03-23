@@ -35,7 +35,7 @@
     "react-use": "^17.5.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "upload-files-to-oss": "^0.0.8",
+    "upload-files-to-oss": "^0.0.9",
     "vaul": "^0.8.9"
   },
   "devDependencies": {
