@@ -22,3 +22,7 @@ export function copyText(text: string) {
   // 移除 textarea 元素
   document.body.removeChild(textarea)
 }
+
+export function replaceLetter(value: string): number {
+  return Number(value.replace(/[A-Z]|[a-z]/g, ''))
+}
