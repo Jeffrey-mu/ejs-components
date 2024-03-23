@@ -1,13 +1,7 @@
 export default () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1.2em"
-    height="1.2em"
-    viewBox="0 0 1024 1024"
-  >
-    <path
-      fill="currentColor"
-      d="M224 768v96.064a64 64 0 0 0 64 64h448a64 64 0 0 0 64-64V768zm0-64h576V160a64 64 0 0 0-64-64H288a64 64 0 0 0-64 64zm32 288a96 96 0 0 1-96-96V128a96 96 0 0 1 96-96h512a96 96 0 0 1 96 96v768a96 96 0 0 1-96 96zm304-144a48 48 0 1 1-96 0a48 48 0 0 1 96 0"
-    />
+  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 36 36">
+    <path fill="currentColor" d="M25 4H11a2 2 0 0 0-2 2v24a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2M11 6h14v18H11Zm0 24v-4h14v4Z" className="clr-i-outline clr-i-outline-path-1" />
+    <path fill="currentColor" d="M17 27h2v2h-2z" className="clr-i-outline clr-i-outline-path-2" />
+    <path fill="none" d="M0 0h36v36H0z" />
   </svg>
 )
