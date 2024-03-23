@@ -74,3 +74,6 @@
     @apply bg-background text-foreground;
   }
 }
+.icon-hover {
+  @apply hover:opacity-60 hover:scale-110;
+}
