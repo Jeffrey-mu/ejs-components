@@ -7,6 +7,7 @@ import CodeDemo from '@/components/CodeDemo'
 import Sidebar from '@/components/Sidebar'
 import RenderHtml from '@/components/CodeDemo/RenderHtml'
 import GoEnd from '@/components/svg/GoEnd'
+import { replaceLetter } from '@/lib/utils'
 
 export const tabs = ['card', 'footer', 'titlebar', 'layout', 'header']
 export default function App() {
@@ -50,6 +51,9 @@ export default function App() {
         >
           {list
             .filter(item => item.info.type === active)
+            .sort((a, b) => {
+              return replaceLetter(a.info.name) - replaceLetter(b.info.name)
+            })
             .map((item, index) => (
               <Card className="p-2 cursor-pointer flex mb-3" key={index}>
                 <div>

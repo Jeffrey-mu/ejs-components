@@ -4,6 +4,7 @@ import { useWindowScroll } from '@uidotdev/usehooks'
 import type { CompDataType } from './CodeDemo'
 import ArrowDown from '@/components/svg/ArrowDown'
 import { tabs } from '@/pages/Index'
+import { replaceLetter } from '@/lib/utils'
 
 export default function App({
   change,
@@ -44,6 +45,9 @@ export default function App({
               >
                 {list
                   .filter(item_list => item_list.info.type === item)
+                  .sort((a, b) => {
+                    return replaceLetter(a.info.name) - replaceLetter(b.info.name)
+                  })
                   .map(item => (
                     <li
                       className={ca(
