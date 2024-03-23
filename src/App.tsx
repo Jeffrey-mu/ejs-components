@@ -16,7 +16,7 @@ function App() {
     document.head.append(style)
   }
   return (
-    <div className="App font-sans bg-slate-100 dark:bg-transparent">
+    <div className="App font-sans bg-slate-100">
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>
