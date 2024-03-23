@@ -52,8 +52,11 @@ export default function App() {
             .map((item) => (
               <Card className="p-2 cursor-pointer flex mb-3">
                 <div>
-                  <a className="pl-3 underline flex items-center text-blue-600 mb-3" href={`#${item.info.name}`}>
-                    {item.info.name}  <ArrowDown rotate={"-rotate-90"} />
+                  <a
+                    className="pl-3 underline flex items-center text-blue-600 mb-3"
+                    href={`#${item.info.name}`}
+                  >
+                    {item.info.name} <ArrowDown rotate={"-rotate-90"} />
                   </a>
                   <RenderHtml html={item.html} />
                 </div>

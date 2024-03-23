@@ -1,21 +1,32 @@
 import { useState } from "react";
 import clsx from "clsx";
-export default function App({ html, mode }: { html: string, mode?: boolean }) {
-  const [width, setWidth] = useState(400)
-  const [height, setHeight] = useState(550)
+import Pc from "@/components/svg/Pc";
+import Mobile from "@/components/svg/Mobile";
+export default function App({ html, mode }: { html: string; mode?: boolean }) {
+  const [width, setWidth] = useState(400);
+  const [height, setHeight] = useState(550);
   // 模拟响应式
   const screen = [
     {
       width: 400,
       height: 550,
-      type: "mobile"
+      type: "mobile",
+      icon: <Mobile />,
     },
     {
       width: 1024,
       height: 700,
-      type: "pc"
-    }
+      type: "pc",
+      icon: <Pc />,
+    },
   ];
+  function switchDevice(type: string) {
+    const device = screen.find((item) => item.type === type);
+    if (device) {
+      setWidth(device.width);
+      setHeight(device.height);
+    }
+  }
   function renderHtml(html: string) {
     return `<!DOCTYPE html>
     <html lang="en">
@@ -34,14 +45,23 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
   // return;
   return mode ? (
     <>
-      <div>
-        screen: {
-          screen.map(item => <span>{item.type}</span>)
-        }
+      <div className="flex gap-3 justify-end items-center">
+        {screen.map((item) => (
+          <span
+            className={clsx(
+              `cursor-pointer ${width === item.width ? "text-orange-500" : ""} icon-hover `,
+            )}
+            onClick={switchDevice.bind(null, item.type)}
+          >
+            {item.icon}
+          </span>
+        ))}
       </div>
-      <div className={clsx(`w-[${width}px] h-[${height}px]`)}>
+      <div className="flex justify-center">
         <iframe
-          className="h-full w-full"
+          className={clsx(
+            `w-[${width}px] h-[${height}px] border-dashed border-2 p-3 overflow-auto hover:border-orange-600 hover:bg-slate-50`,
+          )}
           srcDoc={renderHtml(
             html
               .replace("data-src", "src")

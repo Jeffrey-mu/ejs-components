@@ -68,7 +68,10 @@ export default function App({ compData }: { compData: CompDataType }) {
                     <h2 className="py-2 text-xl font-bold">
                       {compData.info.name}
                     </h2>
-                    <span onClick={copy.bind(null, compData[item])}>
+                    <span
+                      className="icon-hover"
+                      onClick={copy.bind(null, compData[item])}
+                    >
                       {copyState ? <Copy /> : <CopySuccess />}
                     </span>
                   </div>
@@ -91,7 +94,10 @@ export default function App({ compData }: { compData: CompDataType }) {
         })}
       </Tabs>
       <div
-        className={clsx([compData.info.type === "card" ? "w-full" : "w-full", 'p-4'])}
+        className={clsx([
+          compData.info.type === "card" ? "w-full" : "w-full",
+          "p-4",
+        ])}
       >
         <RenderHtml html={compData.html} mode={true} />
       </div>
