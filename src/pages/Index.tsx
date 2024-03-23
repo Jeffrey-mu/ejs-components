@@ -50,8 +50,8 @@ export default function App() {
         >
           {list
             .filter(item => item.info.type === active)
-            .map(item => (
-              <Card className="p-2 cursor-pointer flex mb-3">
+            .map((item, index) => (
+              <Card className="p-2 cursor-pointer flex mb-3" key={index}>
                 <div>
                   <a
                     className="pl-3 underline flex items-center text-blue-600 mb-3"
@@ -69,7 +69,7 @@ export default function App() {
         {list
           .filter(item => item.info.type === active)
           .map(item => (
-            <CodeDemo compData={item} />
+            <CodeDemo compData={item} key={item.ejs} />
           ))}
       </div>
     </div>

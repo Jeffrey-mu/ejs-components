@@ -18,24 +18,7 @@ export interface CompDataType {
     type: string
   }
 }
-const ejsSyntax = {
-  keywords: [
-    'if',
-    'else',
-    'for',
-    'each',
-    'in',
-    'include',
-    'extends',
-    'block',
-    'script',
-    'style',
-    'html',
-    'body',
-  ],
-  string: /("|')(\\?.)*?\1/,
-  comment: /<!--[\s\S]*?-->/,
-}
+
 export default function App({ compData }: { compData: CompDataType }) {
   const [copyState, setCopyState] = useState(false)
   function copy(text: string) {
@@ -73,7 +56,7 @@ export default function App({ compData }: { compData: CompDataType }) {
                       className="icon-hover"
                       onClick={copy.bind(null, compData[item])}
                     >
-                      {copyState ? <Copy /> : <CopySuccess />}
+                      {!copyState ? <Copy /> : <CopySuccess />}
                     </span>
                   </div>
                   <div className="w-full">
@@ -83,7 +66,6 @@ export default function App({ compData }: { compData: CompDataType }) {
                       wrapLines={true}
                       customStyle={{ padding: 20 }}
                       showLineNumbers
-                      languageCustomSyntax={ejsSyntax}
                     >
                       {compData[item]}
                     </SyntaxHighlighter>
