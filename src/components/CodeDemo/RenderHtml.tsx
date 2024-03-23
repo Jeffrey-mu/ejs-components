@@ -5,7 +5,7 @@ import { useDebounce } from 'react-use'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
 import EditCode from '@/components/svg/EditCode'
-import 'ace-builds/src-noconflict/mode-jsx'// jsx模式的包
+import 'ace-builds/src-noconflict/mode-html'// jsx模式的包
 import 'ace-builds/src-noconflict/theme-monokai'// monokai的主题样式
 import 'ace-builds/src-noconflict/ext-language_tools'
 // 代码联想
@@ -13,14 +13,14 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
   const [width, setWidth] = useState(400)
   const [height, setHeight] = useState(550)
   const [innerHtml, setInnerHtml] = useState(html)
+  const [editHtml, setEditHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
-  const [, cancel] = useDebounce(
+  const [,] = useDebounce(
     () => {
-      console.log('useDebounce change')
-      setInnerHtml(innerHtml)
+      setInnerHtml(editHtml)
     },
     500,
-    [innerHtml],
+    [editHtml],
   )
   // 模拟响应式
   const screen = [
@@ -87,7 +87,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
           showEdit ? (
             <div className="p-2 border-2">
               <AceEditor
-                mode="jsx"
+                mode="html"
                 theme="monokai"
                 name="app_code_editor"
                 fontSize={14}
@@ -95,10 +95,9 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
                 height="200px"
                 width="100%"
                 showGutter
-                value={innerHtml}
+                value={editHtml}
                 onChange={(value) => {
-                  console.log('change')
-                  setInnerHtml(value)
+                  setEditHtml(value)
                 }}
                 wrapEnabled
                 highlightActiveLine // 突出活动线
