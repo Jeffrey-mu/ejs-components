@@ -1,48 +1,49 @@
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
-import "./style.css";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { okaidia } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useState } from "react";
-import RenderHtml from "./RenderHtml";
-import { copyText } from "@/lib/utils";
-import clsx from "clsx";
-import Copy from "@/components/svg/Copy";
-import CopySuccess from "@/components/svg/CopySuccess";
-export type CompDataType = {
-  ejs: string;
-  html: string;
-  use: string;
+import { Card, CardBody, Tab, Tabs } from '@nextui-org/react'
+import './style.css'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { useState } from 'react'
+import clsx from 'clsx'
+import RenderHtml from './RenderHtml'
+import { copyText } from '@/lib/utils'
+import Copy from '@/components/svg/Copy'
+import CopySuccess from '@/components/svg/CopySuccess'
+
+export interface CompDataType {
+  ejs: string
+  html: string
+  use: string
   info: {
-    name: string;
-    type: string;
-  };
-};
+    name: string
+    type: string
+  }
+}
 const ejsSyntax = {
   keywords: [
-    "if",
-    "else",
-    "for",
-    "each",
-    "in",
-    "include",
-    "extends",
-    "block",
-    "script",
-    "style",
-    "html",
-    "body",
+    'if',
+    'else',
+    'for',
+    'each',
+    'in',
+    'include',
+    'extends',
+    'block',
+    'script',
+    'style',
+    'html',
+    'body',
   ],
   string: /("|')(\\?.)*?\1/,
   comment: /<!--[\s\S]*?-->/,
-};
+}
 export default function App({ compData }: { compData: CompDataType }) {
-  const [copyState, setCopyState] = useState(false);
+  const [copyState, setCopyState] = useState(false)
   function copy(text: string) {
-    copyText(text);
-    setCopyState(true);
+    copyText(text)
+    setCopyState(true)
     setTimeout(() => {
-      setCopyState(false);
-    }, 2000);
+      setCopyState(false)
+    }, 2000)
   }
   return (
     <Card
@@ -53,13 +54,13 @@ export default function App({ compData }: { compData: CompDataType }) {
         className="my-2 flex justify-end"
         aria-label="Options"
         onSelectionChange={() => {
-          setCopyState(false);
+          setCopyState(false)
         }}
       >
         {(Object.keys(compData) as Array<keyof CompDataType>).map((item) => {
-          if (item === "info") {
-            return null;
-          }
+          if (item === 'info')
+            return null
+
           return (
             <Tab key={item} title={item}>
               <Card>
@@ -90,17 +91,17 @@ export default function App({ compData }: { compData: CompDataType }) {
                 </CardBody>
               </Card>
             </Tab>
-          );
+          )
         })}
       </Tabs>
       <div
         className={clsx([
-          compData.info.type === "card" ? "w-full" : "w-full",
-          "p-4",
+          compData.info.type === 'card' ? 'w-full' : 'w-full',
+          'p-4',
         ])}
       >
         <RenderHtml html={compData.html} mode={true} />
       </div>
     </Card>
-  );
+  )
 }

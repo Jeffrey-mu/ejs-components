@@ -1,3 +1,3 @@
 export default function About() {
-  return <>关于我们</>;
+  return <>关于我们</>
 }

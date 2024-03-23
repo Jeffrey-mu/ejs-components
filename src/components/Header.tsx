@@ -1,17 +1,18 @@
 import {
+  Avatar,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
   Navbar,
   NavbarBrand,
   NavbarContent,
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  Avatar,
-} from "@nextui-org/react";
-import Logo from "./svg/Logo";
+} from '@nextui-org/react'
+import { NavLink } from 'react-router-dom'
+import Logo from './svg/Logo'
 // import ThemeToggle from "./ThemeToggle";
-import { appConfig } from "@/lib/constant";
-import { NavLink } from "react-router-dom";
+import { appConfig } from '@/lib/constant'
+
 export default function App() {
   return (
     <Navbar isBordered maxWidth="2xl">
@@ -60,5 +61,5 @@ export default function App() {
         </Dropdown>
       </NavbarContent>
     </Navbar>
-  );
+  )
 }

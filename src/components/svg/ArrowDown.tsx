@@ -1,4 +1,4 @@
-export default function Svg({ rotate = "" }) {
+export default function Svg({ rotate = '' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export default function Svg({ rotate = "" }) {
       height="1em"
       viewBox="0 0 24 24"
       className={
-        rotate ? "transform transition duration-500 ease-in-out " + rotate : ""
+        rotate ? `transform transition duration-500 ease-in-out ${rotate}` : ''
       }
     >
       <path
@@ -18,5 +18,5 @@ export default function Svg({ rotate = "" }) {
         d="m7 10l5 5l5-5"
       />
     </svg>
-  );
+  )
 }
