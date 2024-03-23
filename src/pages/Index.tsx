@@ -6,7 +6,7 @@ import type { CompDataType } from '@/components/CodeDemo'
 import CodeDemo from '@/components/CodeDemo'
 import Sidebar from '@/components/Sidebar'
 import RenderHtml from '@/components/CodeDemo/RenderHtml'
-import ArrowDown from '@/components/svg/ArrowDown'
+import GoEnd from '@/components/svg/GoEnd'
 
 export const tabs = ['card', 'footer', 'titlebar', 'layout', 'header']
 export default function App() {
@@ -54,12 +54,12 @@ export default function App() {
               <Card className="p-2 cursor-pointer flex mb-3" key={index}>
                 <div>
                   <a
-                    className="pl-3 underline flex items-center text-blue-600 mb-3"
+                    className="pl-3 flex items-center text-slate-800 mb-3"
                     href={`#${item.info.name}`}
                   >
                     {item.info.name}
                     {' '}
-                    <ArrowDown rotate="-rotate-90" />
+                    <GoEnd />
                   </a>
                   <RenderHtml html={item.html} />
                 </div>
