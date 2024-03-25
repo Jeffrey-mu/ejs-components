@@ -37,31 +37,31 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
   // 模拟响应式
   const screen = [
     {
-      width: 320,
+      width: 323,
       height: 550,
       type: 'xs',
       icon: <Mobile />,
     },
     {
-      width: 640,
+      width: 643,
       height: 640,
       type: 'sm',
       icon: <MobileSm />,
     },
     {
-      width: 768,
+      width: 771,
       height: 768,
       type: 'md',
       icon: <Pad />,
     },
     {
-      width: 1024,
+      width: 1027,
       height: 1024,
       type: 'lg',
       icon: <Laptop />,
     },
     {
-      width: 1280,
+      width: 1283,
       height: 1280,
       type: 'xl',
       icon: <Pc />,
@@ -188,7 +188,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
             <div className="flex justify-center">
               <iframe
                 className={clsx(
-                  `w-[${width}px] h-[${height}px] border-dashed border-2 p-3 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
+                  `w-[${width}px] h-[${height}px] border-dashed border-2 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
                 )}
                 srcDoc={renderHtml(
                   innerHtml
