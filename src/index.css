@@ -76,4 +76,5 @@
 }
 .icon-hover {
   @apply hover:opacity-60 hover:scale-110;
+  transition: all .15s;
 }
