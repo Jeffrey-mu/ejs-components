@@ -36,11 +36,8 @@ export default function App() {
   }
   return (
     <div className="flex gap-5">
-      <section className="w-[200px] hidden sm:block">
-        <Sidebar change={handelMenu} list={list} active={active} />
-      </section>
-
-      <div className="flex flex-col w-full pb-80 sm:w-[80%]">
+      <Sidebar change={handelMenu} list={list} active={active} />
+      <div className="flex flex-col w-full pb-80 sm:w-[80%] ml-0 sm:ml-[270px] mt-5">
         <section
           className={ca(
             active === 'card'
