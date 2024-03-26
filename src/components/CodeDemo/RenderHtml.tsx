@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react'
 import clsx from 'clsx'
-import AceEditor from 'react-ace'
-import { useCopyToClipboard, useDebounce, useFullscreen, useToggle } from 'react-use'
+import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
 import { Button, Card, CardBody } from '@nextui-org/react'
+import CodeEditor from './CodeEditor'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
 import EditCode from '@/components/svg/EditCode'
@@ -12,61 +12,49 @@ import Pad from '@/components/svg/Pad'
 import Laptop from '@/components/svg/Laptop'
 import CopySuccess from '@/components/svg/CopySuccess'
 import MobileSm from '@/components/svg/MobileSm'
-import 'ace-builds/src-noconflict/mode-html'// jsx模式的包
-import 'ace-builds/src-noconflict/theme-monokai'// monokai的主题样式
-import 'ace-builds/src-noconflict/ext-language_tools'
-
-// 代码联想
+// 模拟响应式
+export const screen = [
+  {
+    width: 323,
+    height: 550,
+    type: 'xs',
+    icon: <Mobile />,
+  },
+  {
+    width: 643,
+    height: 640,
+    type: 'sm',
+    icon: <MobileSm />,
+  },
+  {
+    width: 771,
+    height: 768,
+    type: 'md',
+    icon: <Pad />,
+  },
+  {
+    width: 1027,
+    height: 1024,
+    type: 'lg',
+    icon: <Laptop />,
+  },
+  {
+    width: 1283,
+    height: 1280,
+    type: 'xl',
+    icon: <Pc />,
+  },
+]
 export default function App({ html, mode }: { html: string, mode?: boolean }) {
   const [width, setWidth] = useState(320)
   const [height, setHeight] = useState(550)
   const [innerHtml, setInnerHtml] = useState(html)
-  const [editHtml, setEditHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
   const ref = useRef(null)
   const [show, toggle] = useToggle(false)
   const isFullscreen = useFullscreen(ref, show, { onClose: () => toggle(false) })
-  const [,] = useDebounce(
-    () => {
-      setInnerHtml(editHtml)
-    },
-    500,
-    [editHtml],
-  )
   const [state, copyToClipboard] = useCopyToClipboard()
-  // 模拟响应式
-  const screen = [
-    {
-      width: 323,
-      height: 550,
-      type: 'xs',
-      icon: <Mobile />,
-    },
-    {
-      width: 643,
-      height: 640,
-      type: 'sm',
-      icon: <MobileSm />,
-    },
-    {
-      width: 771,
-      height: 768,
-      type: 'md',
-      icon: <Pad />,
-    },
-    {
-      width: 1027,
-      height: 1024,
-      type: 'lg',
-      icon: <Laptop />,
-    },
-    {
-      width: 1283,
-      height: 1280,
-      type: 'xl',
-      icon: <Pc />,
-    },
-  ]
+
   function switchDevice(type: string) {
     const device = screen.find(item => item.type === type)
     if (device) {
@@ -156,33 +144,16 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
               showEdit
                 ? (
                   <div className="p-2 border-2">
-                    <AceEditor
+                    <CodeEditor
+                      value={html}
                       mode="html"
-                      theme="monokai"
-                      name="app_code_editor"
-                      fontSize={14}
-                      showPrintMargin
-                      height="300px"
-                      width="100%"
-                      showGutter
-                      value={editHtml}
                       onChange={(value) => {
-                        setEditHtml(value)
+                        setInnerHtml(value)
                       }}
-                      wrapEnabled
-                      highlightActiveLine // 突出活动线
-                      enableSnippets // 启用代码段
-                      setOptions={{
-                        enableBasicAutocompletion: true, // 启用基本自动完成功能
-                        enableLiveAutocompletion: true, // 启用实时自动完成功能 （比如：智能代码提示）
-                        enableSnippets: true, // 启用代码段
-                        showLineNumbers: true,
-                        tabSize: 2,
-                      }}
-                      annotations={[{ row: 0, column: 2, type: 'error', text: 'Some error.' }]}
                     />
                   </div>
-                  ) : <></>
+                  )
+                : <></>
             }
 
             <div className="flex justify-center">
