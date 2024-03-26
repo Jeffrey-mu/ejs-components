@@ -9,9 +9,8 @@
 }
 
 .container {
-  padding: 10px;
   flex: 1;
-  margin: 15px auto;
+  margin: 0 auto;
   min-height: calc(100vh - 244px);
 }
 
@@ -31,4 +30,4 @@
 .fade-exit-active {
   opacity: 0;
   transition: opacity 300ms;
-} /*# sourceMappingURL=index.css.map */
+}/*# sourceMappingURL=index.css.map */
