@@ -8,7 +8,7 @@ export default function Svg() {
     >
       <g
         fill="none"
-        stroke="green"
+        stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"

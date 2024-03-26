@@ -24,7 +24,8 @@ export default function CodeEditor(props: CodeEditorProps) {
       mode="html"
       theme="monokai"
       name="app_code_editor"
-      fontSize={14}
+      fontSize={16}
+      style={{ }}
       showPrintMargin
       height="300px"
       width="100%"
@@ -43,7 +44,6 @@ export default function CodeEditor(props: CodeEditorProps) {
         showLineNumbers: true,
         tabSize: 2,
       }}
-      annotations={[{ row: 0, column: 2, type: 'error', text: 'Some error.' }]}
     />
   )
 }

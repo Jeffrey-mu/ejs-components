@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
-import { Button, Card, CardBody } from '@nextui-org/react'
+import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
 import CodeEditor from './CodeEditor'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
@@ -50,10 +50,11 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
   const [height, setHeight] = useState(550)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
+  const [tooltip, setTooltip] = useState('Copy')
   const ref = useRef(null)
   const [show, toggle] = useToggle(false)
   const isFullscreen = useFullscreen(ref, show, { onClose: () => toggle(false) })
-  const [state, copyToClipboard] = useCopyToClipboard()
+  const [, copyToClipboard] = useCopyToClipboard()
 
   function switchDevice(type: string) {
     const device = screen.find(item => item.type === type)
@@ -124,19 +125,32 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
                 <EditCode />
                 {!showEdit ? ' Show Code' : ' Hide Code'}
               </Button>
-              <Button
-                isIconOnly
-                size="sm"
-                color="primary"
-                variant="faded"
-                onClick={copyToClipboard.bind(null, innerHtml)}
-                className={clsx(
-                  `cursor-pointer icon-hover`,
-                )}
+              <Tooltip
+                content={tooltip}
+                delay={0}
+                closeDelay={0}
               >
-                {!state.value ? <Copy /> : <CopySuccess />}
+                <Button
+                  isIconOnly
+                  size="sm"
+                  color="primary"
+                  variant="faded"
+                  onClick={() => {
+                    copyToClipboard(innerHtml)
+                    setTooltip('Copied!')
+                    setTimeout(() => {
+                      setTooltip('Copy')
+                    }, 1000)
+                  }}
+                  className={clsx(
+                    `cursor-pointer icon-hover`,
+                  )}
+                >
+                  {tooltip === 'Copy' ? <Copy /> : <CopySuccess />}
 
-              </Button>
+                </Button>
+              </Tooltip>
+
             </div>
           </div>
           <CardBody>
