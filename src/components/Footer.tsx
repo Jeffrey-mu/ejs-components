@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <>
-      <footer className=" dark:text-white text-gray-900 border-t-1">
+      <footer className=" dark:text-white text-gray-900 border-t-1 ml-0 sm:ml-[270px]">
         <div className="mx-auto w-full p-4 py-6 lg:py-8  max_width">
 
           <div className="sm:flex sm:items-center sm:justify-between">
@@ -9,7 +9,7 @@ export default function Footer() {
               © 2023
               {' '}
               <a href="https://flowbite.com/" className="hover:underline">
-                Flowbite™
+                Jeffrey
               </a>
               . All Rights Reserved.
             </span>

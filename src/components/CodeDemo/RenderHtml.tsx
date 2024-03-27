@@ -211,7 +211,7 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
               <iframe
                 ref={iframeRef}
                 className={clsx(
-                  `w-[${width}px] h-[${height}px] border-dashed border-2 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
+                  `w-[${width}px] h-[${height}px] border-dashed rounded-sm border-2 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
                 )}
                 srcDoc={renderHtml(
                   innerHtml
