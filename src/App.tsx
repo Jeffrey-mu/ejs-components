@@ -16,7 +16,7 @@ function App() {
     document.head.append(style)
   }
   return (
-    <div className="App font-sans bg-slate-100">
+    <div className="App font-sans absolute inset-0 -z-10 h-fit bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
       <BrowserRouter>
         <Routes>
           <Route element={<Layout />}>

@@ -1,0 +1,9 @@
+[
+  {
+    "info": {
+      "name": "card1",
+      "type": "card"
+    },
+    "html": " <a href=\"romantic-road-trips-from-chennai-to-ooty.html\" class=\"pb-2 overflow-hidden flex gap-2 border-b border-gray-500 border-solid animate__animated  animate__fadeIn\">\n   <img class=\"w-2/5 rounded-sm\" data-src=\"https://image.jiafengfmc.cn/file/af0b29f917017d303b7ee.png\" alt=\"Sunset in the mountains\">\n   <div class=\"flex-1\">\n     <div class=\"text-xs p-1 bg-green-500 w-fit mb-2\">\n       Destinations\n     </div>\n     <div class=\"title-font font-bold sm:text-sm text-sm  text-slate-600 mb-3 line-clamp-2\">\n       Gluten-Free Diet: A Guide On Foods, Benefits, And Diet Plan\n     </div>\n     <div class=\"title-font sm:text-sm text-sm font-medium text-gray-600 mb-3 line-clamp-3 hidden\">\n       Explore the charm of romance while traveling the picturesque route from Chennai to Ooty. Discover magnificent scenery and make priceless memories.\n     </div>\n     <div class=\"pb-2 text-gray-500 text-xs\">\n       <i class=\"iconfont icon-jilu\"></i>\n       Dec 25, 2023\n     </div>\n   </div>\n </a>\n"
+  }
+]
