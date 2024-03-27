@@ -49,10 +49,11 @@ interface RenderHtmlProps {
   html: string
   type?: string
   mode?: boolean
+  showTools?: boolean
 }
-export default function App({ html, mode, type }: RenderHtmlProps) {
+export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
   const [width, setWidth] = useState(323)
-  const [height, setHeight] = useState(550)
+  const [height, setHeight] = useState(350)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
   const [tooltip, setTooltip] = useState('Copy')
@@ -120,76 +121,83 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
     ? (
       <>
         <Card ref={ref}>
-          <div className="flex gap-3 bg-slate-200 justify-between items-center mb-2 p-4">
-            <div className="flex items-center gap-5 text-center">
-              {screen.map(item => (
-                <div
-                  key={item.type}
-                  className={clsx(
-                    `cursor-pointer ${width === item.width ? 'text-slate-400' : ''} icon-hover `,
-                  )}
-                  onClick={switchDevice.bind(null, item.type)}
-                >
-                  {item.icon}
-                  <p className="text-sm">{item.type}</p>
+          {
+            showTools
+              ? (
+                <div className="hidden sm:flex gap-3 bg-slate-200 justify-between items-center mb-2 p-4">
+                  <div className="flex items-center gap-5 text-center">
+                    {screen.map(item => (
+                      <div
+                        key={item.type}
+                        className={clsx(
+                          `cursor-pointer ${width === item.width ? 'text-slate-400' : ''} icon-hover `,
+                        )}
+                        onClick={switchDevice.bind(null, item.type)}
+                      >
+                        {item.icon}
+                        <p className="text-sm">{item.type}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-3">
+                    <Button
+                      size="sm"
+                      color="primary"
+                      variant="faded"
+                      onClick={() => toggle()}
+                      className={clsx(
+                        `cursor-pointer icon-hover`,
+                      )}
+                    >
+                      <ScreenFull />
+                      {isFullscreen ? 'Exit' : 'Full'}
+                      {' '}
+                      Screen
+                    </Button>
+                    <Button
+                      size="sm"
+                      color="primary"
+                      variant="faded"
+                      onClick={setShowEdit.bind(null, !showEdit)}
+                      className={clsx(
+                        `cursor-pointer icon-hover`,
+                      )}
+                    >
+                      <EditCode />
+                      {!showEdit ? ' Show Code' : ' Hide Code'}
+                    </Button>
+                    <Tooltip
+                      content={tooltip}
+                      delay={0}
+                      closeDelay={0}
+                    >
+                      <Button
+                        isIconOnly
+                        size="sm"
+                        color="primary"
+                        variant="faded"
+                        onClick={() => {
+                          copyToClipboard(innerHtml)
+                          setTooltip('Copied!')
+                          setTimeout(() => {
+                            setTooltip('Copy')
+                          }, 1000)
+                        }}
+                        className={clsx(
+                          `cursor-pointer icon-hover`,
+                        )}
+                      >
+                        {tooltip === 'Copy' ? <Copy /> : <CopySuccess />}
+
+                      </Button>
+                    </Tooltip>
+
+                  </div>
                 </div>
-              ))}
-            </div>
-            <div className="flex gap-3">
-              <Button
-                size="sm"
-                color="primary"
-                variant="faded"
-                onClick={() => toggle()}
-                className={clsx(
-                  `cursor-pointer icon-hover`,
-                )}
-              >
-                <ScreenFull />
-                {isFullscreen ? 'Exit' : 'Full'}
-                {' '}
-                Screen
-              </Button>
-              <Button
-                size="sm"
-                color="primary"
-                variant="faded"
-                onClick={setShowEdit.bind(null, !showEdit)}
-                className={clsx(
-                  `cursor-pointer icon-hover`,
-                )}
-              >
-                <EditCode />
-                {!showEdit ? ' Show Code' : ' Hide Code'}
-              </Button>
-              <Tooltip
-                content={tooltip}
-                delay={0}
-                closeDelay={0}
-              >
-                <Button
-                  isIconOnly
-                  size="sm"
-                  color="primary"
-                  variant="faded"
-                  onClick={() => {
-                    copyToClipboard(innerHtml)
-                    setTooltip('Copied!')
-                    setTimeout(() => {
-                      setTooltip('Copy')
-                    }, 1000)
-                  }}
-                  className={clsx(
-                    `cursor-pointer icon-hover`,
-                  )}
-                >
-                  {tooltip === 'Copy' ? <Copy /> : <CopySuccess />}
+                )
+              : <></>
+          }
 
-                </Button>
-              </Tooltip>
-
-            </div>
-          </div>
           <CardBody>
             {
               showEdit
