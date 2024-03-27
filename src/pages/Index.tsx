@@ -53,7 +53,7 @@ export default function App() {
             })
             .map((item, index) => (
               <Card className="p-2 cursor-pointer flex mb-3" key={index}>
-                <div>
+                <div className="">
                   <a
                     className="pl-3 flex items-center text-slate-800 mb-3"
                     href={`#${item.info.name}`}
@@ -69,6 +69,9 @@ export default function App() {
         </section>
         {list
           .filter(item => item.info.type === active)
+          .sort((a, b) => {
+            return replaceLetter(a.info.name) - replaceLetter(b.info.name)
+          })
           .map(item => (
             <CodeDemo compData={item} key={item.ejs} />
           ))}
