@@ -229,6 +229,7 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
     : (
       <div className="flex justify-center items-center flex-1 pb-2">
         <div
+          className="w-full"
           dangerouslySetInnerHTML={{
             __html: html
               .replace('data-src', 'src')
