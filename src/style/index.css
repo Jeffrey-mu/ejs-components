@@ -3,15 +3,14 @@
   margin-inline: auto;
 }
 
-.header .max_width {
+body #root .App .header .max_width {
   display: flex;
   justify-content: space-between;
 }
-
-.container {
+body #root .App .container {
   flex: 1;
   margin: 0 auto;
-  width: min(1536px, 100% - 40px);
+  width: min(1536px, 100% - 40px) !important;
   min-height: calc(100vh - 244px);
 }
 

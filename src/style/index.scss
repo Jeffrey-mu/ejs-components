@@ -3,19 +3,28 @@
   margin-inline: auto;
 }
 
-.header {
-  .max_width {
-    display: flex;
-    justify-content: space-between;
+
+body {
+  #root {
+    .App {
+      .header {
+        .max_width {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+
+      .container {
+        flex: 1;
+        margin: 0 auto;
+        width: min(1536px, calc(100% - 40px)) !important;
+        min-height: calc(100vh - (64px + 180px));
+      }
+    }
+
   }
 }
 
-.container {
-  flex: 1;
-  margin: 0 auto;
-  width: min(1536px, calc(100% - 40px));
-  min-height: calc(100vh - (64px + 180px));
-}
 
 .fade-enter {
   opacity: 0;
