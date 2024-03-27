@@ -11,7 +11,7 @@
 .container {
   flex: 1;
   margin: 0 auto;
-  width: min(1536px, 100% - 50px);
+  width: min(1536px, 100% - 40px);
   min-height: calc(100vh - 244px);
 }
 

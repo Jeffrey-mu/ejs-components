@@ -13,7 +13,7 @@
 .container {
   flex: 1;
   margin: 0 auto;
-  width: min(1536px, calc(100% - 50px));
+  width: min(1536px, calc(100% - 40px));
   min-height: calc(100vh - (64px + 180px));
 }
 
