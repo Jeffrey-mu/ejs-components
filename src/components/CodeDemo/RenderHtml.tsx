@@ -57,7 +57,7 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
   const [showEdit, setShowEdit] = useState(false)
   const [tooltip, setTooltip] = useState('Copy')
   const ref = useRef(null)
-  const iframeRef = useRef(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
   const [show, toggle] = useToggle(false)
   const isFullscreen = useFullscreen(ref, show, { onClose: () => toggle(false) })
   const [, copyToClipboard] = useCopyToClipboard()
@@ -98,9 +98,12 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
   }
   function onLoad() {
     const iframe = iframeRef.current
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document
-    const bodyHeight = iframeDocument.body.scrollHeight
-    setHeight(bodyHeight + 5)
+    if (!iframe)
+      return
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document
+    const bodyHeight = iframeDocument?.body.scrollHeight
+    if (bodyHeight)
+      setHeight(bodyHeight + 5)
   }
   useEffect(() => {
     const iframe = iframeRef.current
@@ -108,7 +111,6 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
       return
 
     iframe.addEventListener('load', onLoad)
-
     return () => {
       iframe.removeEventListener('load', onLoad)
     }
