@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
 import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
@@ -22,45 +22,51 @@ export const screen = [
   },
   {
     width: 643,
-    height: 640,
+    height: 550,
     type: 'sm',
     icon: <MobileSm />,
   },
   {
     width: 771,
-    height: 768,
+    height: 550,
     type: 'md',
     icon: <Pad />,
   },
   {
     width: 1027,
-    height: 1024,
+    height: 550,
     type: 'lg',
     icon: <Laptop />,
   },
   {
     width: 1283,
-    height: 1280,
+    height: 550,
     type: 'xl',
     icon: <Pc />,
   },
 ]
-export default function App({ html, mode }: { html: string, mode?: boolean }) {
-  const [width, setWidth] = useState(320)
+interface RenderHtmlProps {
+  html: string
+  type?: string
+  mode?: boolean
+}
+export default function App({ html, mode, type }: RenderHtmlProps) {
+  const [width, setWidth] = useState(323)
   const [height, setHeight] = useState(550)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
   const [tooltip, setTooltip] = useState('Copy')
   const ref = useRef(null)
+  const iframeRef = useRef(null)
   const [show, toggle] = useToggle(false)
   const isFullscreen = useFullscreen(ref, show, { onClose: () => toggle(false) })
   const [, copyToClipboard] = useCopyToClipboard()
-
   function switchDevice(type: string) {
     const device = screen.find(item => item.type === type)
     if (device) {
       setWidth(device.width)
       setHeight(device.height)
+      setTimeout(() => onLoad())
     }
   }
   function renderHtml(html: string) {
@@ -74,10 +80,39 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
       <title>ejs & html</title>
     </head>
     <body>
-    ${html}
+      ${formatWidth(html)}
     </body>
     </html>`
   }
+  function formatWidth(html: string): string {
+    if (type === 'card') {
+      return `
+      <div class="flex justify-center">
+        <div class="max-w-[450px]">
+          ${html}
+      </div>
+      </div>
+      `
+    }
+    return html
+  }
+  function onLoad() {
+    const iframe = iframeRef.current
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow.document
+    const bodyHeight = iframeDocument.body.scrollHeight
+    setHeight(bodyHeight + 5)
+  }
+  useEffect(() => {
+    const iframe = iframeRef.current
+    if (!iframe)
+      return
+
+    iframe.addEventListener('load', onLoad)
+
+    return () => {
+      iframe.removeEventListener('load', onLoad)
+    }
+  }, [iframeRef])
   // return;
   return mode
     ? (
@@ -172,6 +207,7 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
 
             <div className="flex justify-center">
               <iframe
+                ref={iframeRef}
                 className={clsx(
                   `w-[${width}px] h-[${height}px] border-dashed border-2 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
                 )}
@@ -189,12 +225,14 @@ export default function App({ html, mode }: { html: string, mode?: boolean }) {
       </>
       )
     : (
-      <div
-        dangerouslySetInnerHTML={{
-          __html: html
-            .replace('data-src', 'src')
-            .replace('<a ', '<a onClick="event.preventDefault();" '),
-        }}
-      />
+      <div className="flex justify-center items-center flex-1 pb-2">
+        <div
+          dangerouslySetInnerHTML={{
+            __html: html
+              .replace('data-src', 'src')
+              .replace('<a ', '<a onClick="event.preventDefault();" '),
+          }}
+        />
+      </div>
       )
 }

@@ -82,7 +82,7 @@ export default function App({ compData }: { compData: CompDataType }) {
           'p-4',
         ])}
       >
-        <RenderHtml html={compData.html} mode={true} />
+        <RenderHtml html={compData.html} mode={true} type={compData.info.type} />
       </div>
     </Card>
   )
