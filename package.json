@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 0.0.0.0",
     "dep": "npm run build && npm run rl",
     "build": "tsc && vite build",
     "rl": "node scripts/release.js",
