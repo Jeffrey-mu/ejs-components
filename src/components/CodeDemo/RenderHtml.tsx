@@ -15,31 +15,31 @@ import MobileSm from '@/components/svg/MobileSm'
 // 模拟响应式
 export const screen = [
   {
-    width: 323,
+    width: 320,
     height: 550,
     type: 'xs',
     icon: <Mobile />,
   },
   {
-    width: 643,
+    width: 640,
     height: 550,
     type: 'sm',
     icon: <MobileSm />,
   },
   {
-    width: 771,
+    width: 768,
     height: 550,
     type: 'md',
     icon: <Pad />,
   },
   {
-    width: 1027,
+    width: 1024,
     height: 550,
     type: 'lg',
     icon: <Laptop />,
   },
   {
-    width: 1283,
+    width: 1280,
     height: 550,
     type: 'xl',
     icon: <Pc />,
@@ -211,7 +211,7 @@ export default function App({ html, mode, type }: RenderHtmlProps) {
               <iframe
                 ref={iframeRef}
                 className={clsx(
-                  `w-[${width}px] h-[${height}px] border-dashed rounded-sm border-2 overflow-auto hover:border-orange-400 hover:bg-slate-50`,
+                  `w-[${width}px] h-[${height}px] border-dashed rounded-sm border-2 box-content overflow-auto hover:border-orange-400 hover:bg-slate-50`,
                 )}
                 srcDoc={renderHtml(
                   innerHtml
