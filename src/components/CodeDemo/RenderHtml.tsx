@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
 import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
 import CodeEditor from './CodeEditor'
+import VsCode from './VsCode'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
 import EditCode from '@/components/svg/EditCode'
@@ -203,13 +204,20 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
               showEdit
                 ? (
                   <div className="p-2 border-2">
-                    <CodeEditor
+                    <VsCode
                       value={html}
                       mode="html"
                       onChange={(value) => {
                         setInnerHtml(value)
                       }}
                     />
+                    {/* <CodeEditor
+                      value={html}
+                      mode="html"
+                      onChange={(value) => {
+                        setInnerHtml(value)
+                      }}
+                    /> */}
                   </div>
                   )
                 : <></>
