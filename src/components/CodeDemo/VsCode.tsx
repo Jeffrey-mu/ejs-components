@@ -1,6 +1,6 @@
-import * as monaco from 'monaco-editor'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
+import { v4 as uuidv4 } from 'uuid'
 
 interface CodeEditorProps {
   value: string
@@ -10,46 +10,40 @@ interface CodeEditorProps {
 
 const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   const [debounceValue, setDebounceValue] = useState(props.value)
-  const [,] = useDebounce(() => {
+  const [uuid] = useState(uuidv4()) // Store the UUID in state
+
+  useDebounce(() => {
     props.onChange(debounceValue)
   }, 500, [debounceValue])
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  let monacoInstance: monaco.editor.IStandaloneCodeEditor | null = null
-
   useEffect(() => {
-    if (containerRef.current) {
-      if (monacoInstance) {
-        monacoInstance.layout()
-      }
-      else {
-        monacoInstance = monaco.editor.create(containerRef.current, {
-          value: props.value,
-          language: props.mode || 'html',
-          theme: 'vs-dark',
-          wordWrap: 'on',
-          fontSize: 16,
-        })
-
-        window.addEventListener('resize', () => {
-          if (monacoInstance)
-            monacoInstance.layout()
-        })
-
-        monacoInstance.onDidChangeModelContent(() => {
-          if (monacoInstance)
-            setDebounceValue(monacoInstance.getValue())
-        })
-      }
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === `${uuid}` && e.newValue)
+        setDebounceValue(e.newValue)
     }
+
+    window.addEventListener('storage', handleStorageChange)
 
     return () => {
-      if (monacoInstance)
-        monacoInstance.dispose()
+      window.removeEventListener('storage', handleStorageChange)
     }
-  }, [])
+  }, [uuid])
 
-  return <div ref={containerRef} className="h-60" />
+  const data = {
+    html: props.value,
+    option: {
+      automaticLayout: true,
+      language: 'html',
+      theme: 'vs-dark',
+      wordWrap: 'on',
+      roundedSelection: false,
+      scrollBeyondLastLine: false,
+      fontSize: 16,
+    },
+    uuid,
+  }
+
+  return <iframe src={`/code/index.html?${JSON.stringify(data)}`} className="w-full h-80"></iframe>
 }
 
 export default CodeEditor

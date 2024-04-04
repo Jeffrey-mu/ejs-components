@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
 import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
-import CodeEditor from './CodeEditor'
 import VsCode from './VsCode'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
@@ -72,18 +71,18 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     }
   }
   function renderHtml(html: string) {
-    return `<!DOCTYPE html>
+    return `<!doctype html>
     <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4006584_j5f79uup7rj.css">
-      <script src="https://cdn.tailwindcss.com"></script>
-      <title>ejs & html</title>
-    </head>
-    <body>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4006584_j5f79uup7rj.css">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>ejs & html</title>
+      </head>
+      <body>
       ${formatWidth(html)}
-    </body>
+      </body>
     </html>`
   }
   function formatWidth(html: string): string {
@@ -208,16 +207,10 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                       value={html}
                       mode="html"
                       onChange={(value) => {
+                        console.log(value, 'html')
                         setInnerHtml(value)
                       }}
                     />
-                    {/* <CodeEditor
-                      value={html}
-                      mode="html"
-                      onChange={(value) => {
-                        setInnerHtml(value)
-                      }}
-                    /> */}
                   </div>
                   )
                 : <></>
