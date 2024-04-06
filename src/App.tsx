@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Index from '@/pages/Index'
+import Library from '@/pages/Library'
 import About from '@/pages/About'
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Index />} />
+            <Route path="/library" element={<Library />} />
             <Route path="/about" element={<About />} />
           </Route>
         </Routes>
