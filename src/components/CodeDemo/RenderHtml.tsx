@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useFullscreen, useToggle } from 'react-use'
-import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
+import { Button, Card, CardBody } from '@nextui-org/react'
 import VsCode from './VsCode'
 import CopyBtn from '@/components/CopyBtn'
 import Pc from '@/components/svg/Pc'
