@@ -1,36 +1,67 @@
-import {
-  Avatar,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-} from '@nextui-org/react'
-import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
+import { NavLink, useLocation } from 'react-router-dom'
+import clsx from 'clsx'
 import Logo from './svg/Logo'
-// import ThemeToggle from "./ThemeToggle";
 import { appConfig } from '@/lib/constant'
 
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const location = useLocation()
+  const [pathname, setPathname] = useState('/')
+  useEffect(() => {
+    setPathname(location.pathname)
+  })
+  const menuItems = [
+    {
+      name: 'Components',
+      path: '/',
+    },
+    {
+      name: 'Library',
+      path: '/Library',
+    },
+    {
+      name: 'About',
+      path: '/About',
+    },
+  ]
+
   return (
-    <Navbar isBordered maxWidth="2xl">
-      <NavbarBrand>
-        <NavLink
-          to="/"
-          className="flex gap-2 self-center text-orange-600 font-semibold whitespace-nowrap"
-        >
-          <Logo />
-          <p className="self-center text-2xl whitespace-nowrap">
-            {appConfig.siteName}
-          </p>
-        </NavLink>
-      </NavbarBrand>
+    <Navbar isBordered onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <NavLink
+            to="/"
+            className="flex gap-2 self-center text-orange-600 font-semibold whitespace-nowrap"
+          >
+            <Logo />
+            <p className="self-center text-2xl whitespace-nowrap">
+              {appConfig.siteName}
+              {' '}
+            </p>
+          </NavLink>
+        </NavbarBrand>
+      </NavbarContent>
 
-      <NavbarContent as="div" justify="end">
-        {/* <ThemeToggle /> */}
-
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {
+          menuItems.map((item) => {
+            return (
+              <NavbarItem key={item.name}>
+                <NavLink className={clsx(pathname === item.path ? 'text-orange-600' : 'text-yellow-800')} to={item.path}>
+                  {item.name}
+                </NavLink>
+              </NavbarItem>
+            )
+          })
+        }
+      </NavbarContent>
+      <NavbarContent justify="end">
         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -60,6 +91,21 @@ export default function App() {
           </DropdownMenu>
         </Dropdown>
       </NavbarContent>
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <NavLink
+              color={
+                index === 2 ? 'primary' : index === menuItems.length - 1 ? 'danger' : 'foreground'
+              }
+              className="w-full"
+              to={item.path}
+            >
+              {item.name}
+            </NavLink>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   )
 }
