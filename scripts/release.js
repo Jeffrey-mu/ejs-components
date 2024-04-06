@@ -1,8 +1,6 @@
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import uploadFiles from 'upload-files-to-oss'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
+import { __dirname } from './utils.js'
 
 uploadFiles({
   // eslint-disable-next-line node/prefer-global/process
