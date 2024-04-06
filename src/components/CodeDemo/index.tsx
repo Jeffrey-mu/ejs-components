@@ -22,6 +22,14 @@ export default function App({ compData }: { compData: CompDataType }) {
       className="flex w-full flex-col p-3 CodeDemo mb-3"
       id={compData.info.name}
     >
+      <div
+        className={clsx([
+          compData.info.type === 'card' ? 'w-full' : 'w-full',
+          'p-4',
+        ])}
+      >
+        <RenderHtml html={compData.html} mode={true} showTools={true} type={compData.info.type} />
+      </div>
       <Tabs
         className="my-2 flex justify-end"
         aria-label="Options"
@@ -57,14 +65,7 @@ export default function App({ compData }: { compData: CompDataType }) {
           )
         })}
       </Tabs>
-      <div
-        className={clsx([
-          compData.info.type === 'card' ? 'w-full' : 'w-full',
-          'p-4',
-        ])}
-      >
-        <RenderHtml html={compData.html} mode={true} showTools={true} type={compData.info.type} />
-      </div>
+
     </Card>
   )
 }
