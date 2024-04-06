@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import clsx from 'clsx'
-import { useCopyToClipboard, useFullscreen, useToggle } from 'react-use'
+import { useFullscreen, useToggle } from 'react-use'
 import { Button, Card, CardBody, Tooltip } from '@nextui-org/react'
 import VsCode from './VsCode'
+import CopyBtn from '@/components/CopyBtn'
 import Pc from '@/components/svg/Pc'
 import Mobile from '@/components/svg/Mobile'
 import EditCode from '@/components/svg/EditCode'
-import Copy from '@/components/svg/Copy'
 import ScreenFull from '@/components/svg/ScreenFull'
 import Pad from '@/components/svg/Pad'
 import Laptop from '@/components/svg/Laptop'
-import CopySuccess from '@/components/svg/CopySuccess'
 import MobileSm from '@/components/svg/MobileSm'
 // 模拟响应式
 export const screen = [
@@ -56,12 +55,10 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
   const [height, setHeight] = useState(350)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
-  const [tooltip, setTooltip] = useState('Copy')
   const ref = useRef(null)
   const iframeRef = useRef<HTMLIFrameElement>(null)
   const [show, toggle] = useToggle(false)
   const isFullscreen = useFullscreen(ref, show, { onClose: () => toggle(false) })
-  const [, copyToClipboard] = useCopyToClipboard()
   function switchDevice(type: string) {
     const device = screen.find(item => item.type === type)
     if (device) {
@@ -166,57 +163,15 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                       <EditCode />
                       {!showEdit ? ' Show Code' : ' Hide Code'}
                     </Button>
-                    <Tooltip
-                      content={tooltip}
-                      delay={0}
-                      closeDelay={0}
-                    >
-                      <Button
-                        isIconOnly
-                        size="sm"
-                        color="primary"
-                        variant="faded"
-                        onClick={() => {
-                          copyToClipboard(innerHtml)
-                          setTooltip('Copied!')
-                          setTimeout(() => {
-                            setTooltip('Copy')
-                          }, 1000)
-                        }}
-                        className={clsx(
-                          `cursor-pointer icon-hover`,
-                        )}
-                      >
-                        {tooltip === 'Copy' ? <Copy /> : <CopySuccess />}
-
-                      </Button>
-                    </Tooltip>
-
+                    <CopyBtn value={innerHtml} />
                   </div>
                 </div>
                 )
               : <></>
           }
 
-          <CardBody>
-            {
-              showEdit
-                ? (
-                  <div className="p-2 border-2">
-                    <VsCode
-                      value={html}
-                      mode="html"
-                      onChange={(value) => {
-                        console.log(value, 'html')
-                        setInnerHtml(value)
-                      }}
-                    />
-                  </div>
-                  )
-                : <></>
-            }
-
-            <div className="flex justify-center">
+          <CardBody className={clsx(isFullscreen ? '' : '', 'flex flex-col gap-4')}>
+            <div className="flex justify-center flex-1">
               <iframe
                 ref={iframeRef}
                 className={clsx(
@@ -230,6 +185,30 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
               >
               </iframe>
             </div>
+            {
+              showEdit
+                ? (
+                  <div className="flex-1 border-t-2 border-solid border-teal-800 rounded-lg overflow-hidden relative">
+                    <CopyBtn
+                      value={innerHtml}
+                      className={clsx(
+                        `absolute bottom-2 right-10 bg-gray-700/80 text-white border-none`,
+                      )}
+                    />
+
+                    <VsCode
+                      value={html}
+                      mode="html"
+                      onChange={(value) => {
+                        console.log(value, 'html')
+                        setInnerHtml(value)
+                      }}
+                    />
+                  </div>
+                  )
+                : <></>
+            }
+
           </CardBody>
 
         </Card>

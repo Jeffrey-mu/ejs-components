@@ -17,6 +17,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   }, 500, [debounceValue])
 
   useEffect(() => {
+    sessionStorage.setItem(uuid, props.value)
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === `${uuid}` && e.newValue)
         setDebounceValue(e.newValue)
@@ -27,10 +28,9 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
     return () => {
       window.removeEventListener('storage', handleStorageChange)
     }
-  }, [uuid])
+  }, [])
 
   const data = {
-    html: props.value,
     option: {
       automaticLayout: true,
       language: 'html',
@@ -43,7 +43,7 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
     uuid,
   }
 
-  return <iframe src={`/code/index.html?${JSON.stringify(data)}`} className="w-full h-80"></iframe>
+  return <iframe src={`/code/index.html?${JSON.stringify(data)}`} className="w-full h-full min-h-80"></iframe>
 }
 
 export default CodeEditor

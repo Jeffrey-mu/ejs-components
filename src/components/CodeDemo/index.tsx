@@ -2,12 +2,9 @@ import { Card, CardBody, Tab, Tabs } from '@nextui-org/react'
 import './style.css'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { okaidia } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { useState } from 'react'
 import clsx from 'clsx'
+import CopyBtn from '../CopyBtn'
 import RenderHtml from './RenderHtml'
-import { copyText } from '@/lib/utils'
-import Copy from '@/components/svg/Copy'
-import CopySuccess from '@/components/svg/CopySuccess'
 
 export interface CompDataType {
   ejs: string
@@ -20,14 +17,6 @@ export interface CompDataType {
 }
 
 export default function App({ compData }: { compData: CompDataType }) {
-  const [copyState, setCopyState] = useState(false)
-  function copy(text: string) {
-    copyText(text)
-    setCopyState(true)
-    setTimeout(() => {
-      setCopyState(false)
-    }, 2000)
-  }
   return (
     <Card
       className="flex w-full flex-col p-3 CodeDemo mb-3"
@@ -36,9 +25,6 @@ export default function App({ compData }: { compData: CompDataType }) {
       <Tabs
         className="my-2 flex justify-end"
         aria-label="Options"
-        onSelectionChange={() => {
-          setCopyState(false)
-        }}
       >
         {(Object.keys(compData) as Array<keyof CompDataType>).map((item) => {
           if (item === 'info')
@@ -52,12 +38,7 @@ export default function App({ compData }: { compData: CompDataType }) {
                     <h2 className="py-2 text-xl font-bold">
                       {compData.info.name}
                     </h2>
-                    <span
-                      className="icon-hover"
-                      onClick={copy.bind(null, compData[item])}
-                    >
-                      {!copyState ? <Copy /> : <CopySuccess />}
-                    </span>
+                    <CopyBtn value={compData[item]}></CopyBtn>
                   </div>
                   <div className="w-full">
                     <SyntaxHighlighter
