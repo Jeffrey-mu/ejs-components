@@ -39,6 +39,7 @@
     "react-router-dom": "^6.21.3",
     "react-syntax-highlighter": "^15.5.0",
     "react-use": "^17.5.0",
+    "split-pane-react": "^0.1.3",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "upload-files-to-oss": "^0.0.9",
