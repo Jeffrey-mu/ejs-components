@@ -9,11 +9,11 @@ import RenderHtml from '@/components/CodeDemo/RenderHtml'
 import GoEnd from '@/components/svg/GoEnd'
 import { replaceLetter } from '@/lib/utils'
 
-export const tabs = ['card', 'footer', 'titlebar', 'layout', 'header']
+export const tabs = ['buttons', 'card', 'footer', 'titlebar', 'layout', 'header']
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([])
-  const [active, setActive] = useState(tabs[0])
-
+  const [active, setActive] = useState('')
+  const [tabs, setTabs] = useState<string []>([])
   useEffect(() => {
     fetch(`${api}/componentsList`, {
       method: 'get',
@@ -23,8 +23,12 @@ export default function App() {
         return res.json()
       })
       .then((res) => {
-        if (res.code === 200)
+        if (res.code === 200) {
+          const tabs = [...new Set((res.data as CompDataType[]).map(item => item.info.type))].sort()
           setList(res.data)
+          setActive(tabs[0])
+          setTabs(tabs)
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -36,7 +40,7 @@ export default function App() {
   }
   return (
     <div className="flex gap-5">
-      <Sidebar change={handelMenu} list={list} active={active} />
+      <Sidebar change={handelMenu} list={list} active={active} tabs={tabs} />
       <div className="flex flex-col w-full pb-80 sm:w-[80%] ml-0 sm:ml-[270px] mt-5">
         <section
           className={ca(

@@ -3,17 +3,18 @@ import { useLocation } from 'react-use'
 import { useWindowScroll } from '@uidotdev/usehooks'
 import type { CompDataType } from './CodeDemo'
 import ArrowDown from '@/components/svg/ArrowDown'
-import { tabs } from '@/pages/Index'
 import { replaceLetter } from '@/lib/utils'
 
 export default function App({
   change,
   list,
   active,
+  tabs,
 }: {
   change: (value: string) => void
   list: CompDataType[]
   active: string
+  tabs: string[]
 }) {
   const state = useLocation()
   const [, scrollTo] = useWindowScroll()
@@ -23,11 +24,11 @@ export default function App({
   }
   return (
     <nav className="fixed top-[64px] w-[250px] hidden sm:block max-h-[calc(100vh-64px)] overflow-auto">
-      <ul className="h-full box-border bg-content1 outline-none shadow-medium transition-transform-background flex w-full flex-col p-3 pt-6 CodeDemo mb-3 gap-3 text-yellow-800">
+      <ul className="h-full box-border bg-content1 outline-none shadow-sm border transition-transform-background flex w-full flex-col p-3 pt-6 CodeDemo mb-3 gap-3 text-yellow-800">
         <li className="text-xl font-bold">Components</li>
         {tabs.map((item, index) => {
           return (
-            <li key={index}>
+            <li key={`${item + index}tabs`}>
               <span
                 onClick={handelMenu.bind(null, item)}
                 className={ca(
@@ -53,7 +54,7 @@ export default function App({
                       className={ca(
                         `border-l-1 ml-6 h-10  flex cursor-pointer `,
                       )}
-                      key={item.use}
+                      key={`Sidebar${index}`}
                     >
                       <a
                         className={ca(

@@ -11,6 +11,7 @@ import ScreenFull from '@/components/svg/ScreenFull'
 import Pad from '@/components/svg/Pad'
 import Laptop from '@/components/svg/Laptop'
 import MobileSm from '@/components/svg/MobileSm'
+import { flexLayout } from '@/pages/Library'
 // 模拟响应式
 export const screen = [
   {
@@ -67,6 +68,9 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
       setTimeout(() => onLoad())
     }
   }
+  useEffect(() => {
+    setInnerHtml(html)
+  }, [html])
   function renderHtml(html: string) {
     return `<!doctype html>
     <html lang="en">
@@ -83,7 +87,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     </html>`
   }
   function formatWidth(html: string): string {
-    if (type === 'card') {
+    if (flexLayout.includes(type as string)) {
       return `
       <div class="flex justify-center">
         <div class="max-w-[450px]">

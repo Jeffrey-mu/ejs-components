@@ -26,7 +26,7 @@ export default function App({ compData }: { compData: CompDataType }) {
         className="my-2 flex justify-end"
         aria-label="Options"
       >
-        {(Object.keys(compData) as Array<keyof CompDataType>).map((item) => {
+        {(Object.keys(compData) as Array<keyof CompDataType>).filter(item => item !== 'info' && compData[item] !== '').map((item) => {
           if (item === 'info')
             return null
 
