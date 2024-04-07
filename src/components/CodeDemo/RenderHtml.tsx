@@ -78,7 +78,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="//at.alicdn.com/t/c/font_4006584_j5f79uup7rj.css">
         <script src="https://cdn.tailwindcss.com"></script>
-        <title>ejs & html</title>
+        <title>tailwindcss & html</title>
       </head>
       <body class="h-full ${flexLayout.includes(type as string) ? 'flex flex-col justify-center items-center' : ''} ">
       ${formatWidth(html)}
