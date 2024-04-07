@@ -81,7 +81,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
         <script src="https://cdn.tailwindcss.com"></script>
         <title>ejs & html</title>
       </head>
-      <body class="h-full flex flex-col justify-center items-center">
+      <body class="h-full ${flexLayout.includes(type as string) ? 'flex flex-col justify-center items-center' : ''} ">
       ${formatWidth(html)}
       </body>
     </html>`
