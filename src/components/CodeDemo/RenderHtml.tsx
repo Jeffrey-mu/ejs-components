@@ -53,7 +53,7 @@ interface RenderHtmlProps {
 }
 export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
   const [width, setWidth] = useState(320)
-  const [height, setHeight] = useState(550)
+  const [height, setHeight] = useState(320)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
   const ref = useRef(null)
@@ -64,7 +64,6 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     const device = screen.find(item => item.type === type)
     if (device) {
       setWidth(device.width)
-      setHeight(device.height)
       setTimeout(() => onLoad())
     }
   }
@@ -102,10 +101,17 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     const iframe = iframeRef.current
     if (!iframe)
       return
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document
-    const bodyHeight = iframeDocument?.body.scrollHeight
-    if (bodyHeight)
-      setHeight(bodyHeight + 5)
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
+    const firstChildElement = iframeDocument?.body.firstElementChild;
+
+    if (firstChildElement) {
+      const computedStyle = window.getComputedStyle(firstChildElement);
+      const height = parseFloat(computedStyle.height);
+      const marginTop = parseFloat(computedStyle.marginTop);
+      const marginBottom = parseFloat(computedStyle.marginBottom);
+      const totalHeight = height + marginTop + marginBottom;
+      setHeight(totalHeight + 5)
+    }
   }
   useEffect(() => {
     const iframe = iframeRef.current
@@ -116,7 +122,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     return () => {
       iframe.removeEventListener('load', onLoad)
     }
-  }, [iframeRef])
+  }, [width])
   // return;
   return mode
     ? (
@@ -170,7 +176,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                     <CopyBtn value={innerHtml} />
                   </div>
                 </div>
-                )
+              )
               : <></>
           }
 
@@ -179,7 +185,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
               <iframe
                 ref={iframeRef}
                 className={clsx(
-                  `w-[${width}px] h-[${height}px] min-h-40 border-dashed rounded-xl border-2 box-content overflow-auto p-5 hover:border-orange-200`,
+                  `w-[${width}px] h-[${height}px] min-h-60 border-dashed rounded-xl border-2 box-content overflow-auto p-5 hover:border-orange-200`,
                 )}
                 srcDoc={renderHtml(
                   innerHtml
@@ -209,7 +215,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                       }}
                     />
                   </div>
-                  )
+                )
                 : <></>
             }
 
@@ -217,7 +223,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
 
         </Card>
       </>
-      )
+    )
     : (
       <div className="flex justify-center items-center flex-1 pb-2">
         <div
@@ -229,5 +235,5 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
           }}
         />
       </div>
-      )
+    )
 }
