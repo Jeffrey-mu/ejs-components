@@ -52,8 +52,8 @@ interface RenderHtmlProps {
   showTools?: boolean
 }
 export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
-  const [width, setWidth] = useState(323)
-  const [height, setHeight] = useState(350)
+  const [width, setWidth] = useState(320)
+  const [height, setHeight] = useState(550)
   const [innerHtml, setInnerHtml] = useState(html)
   const [showEdit, setShowEdit] = useState(false)
   const ref = useRef(null)
@@ -73,7 +73,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
   }, [html])
   function renderHtml(html: string) {
     return `<!doctype html>
-    <html lang="en">
+    <html lang="en" class="h-full">
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,7 +81,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
         <script src="https://cdn.tailwindcss.com"></script>
         <title>ejs & html</title>
       </head>
-      <body>
+      <body class="h-full flex flex-col justify-center items-center">
       ${formatWidth(html)}
       </body>
     </html>`
@@ -179,7 +179,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
               <iframe
                 ref={iframeRef}
                 className={clsx(
-                  `w-[${width}px] h-[${height}px] border-dashed rounded-xl border-2 box-content overflow-auto p-5 hover:border-orange-200`,
+                  `w-[${width}px] h-[${height}px] min-h-40 border-dashed rounded-xl border-2 box-content overflow-auto p-5 hover:border-orange-200`,
                 )}
                 srcDoc={renderHtml(
                   innerHtml
