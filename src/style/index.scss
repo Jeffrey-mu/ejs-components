@@ -2,7 +2,9 @@
   width: min(1536px, 100% - 30px);
   margin-inline: auto;
 }
-
+html, body{
+  scroll-behavior: smooth;
+}
 
 body {
   #root {

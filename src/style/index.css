@@ -3,6 +3,10 @@
   margin-inline: auto;
 }
 
+html, body {
+  scroll-behavior: smooth;
+}
+
 body #root .App .header .max_width {
   display: flex;
   justify-content: space-between;
