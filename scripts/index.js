@@ -19,7 +19,7 @@ function initializeLibrary() {
 
     dataJson.push({
       info: {
-        name: `${type}_${count}`, // 使用计数器值作为后缀
+        name: `${type.slice(0, -1)}_${count}`, // 使用计数器值作为后缀
         type,
       },
       ejs: '',
