@@ -15,6 +15,11 @@ export default function App() {
   const [active, setActive] = useState('')
   const [tabs, setTabs] = useState<string []>([])
   useEffect(() => {
+    const sessionStorage_componentsList = sessionStorage.getItem('componentsList')
+    if (sessionStorage_componentsList) {
+      initializeData(JSON.parse(sessionStorage_componentsList))
+      return
+    }
     fetch(`${api}/componentsList`, {
       method: 'get',
       headers,
@@ -24,10 +29,8 @@ export default function App() {
       })
       .then((res) => {
         if (res.code === 200) {
-          const tabs = [...new Set((res.data as CompDataType[]).map(item => item.info.type))].sort()
-          setList(res.data)
-          setActive(tabs[0])
-          setTabs(tabs)
+          initializeData(res.data)
+          sessionStorage.setItem('componentsList', JSON.stringify(res.data))
         }
       })
       .catch((err) => {
@@ -35,6 +38,12 @@ export default function App() {
         setList([])
       })
   }, [])
+  function initializeData(data: CompDataType[]) {
+    const tabs = [...new Set(data.map(item => item.info.type))].sort()
+    setList(data)
+    setActive(tabs[0])
+    setTabs(tabs)
+  }
   function handelMenu(value: string) {
     setActive(value)
   }
