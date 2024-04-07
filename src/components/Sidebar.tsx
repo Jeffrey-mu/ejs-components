@@ -49,12 +49,12 @@ export default function App({
                   .sort((a, b) => {
                     return replaceLetter(a.info.name) - replaceLetter(b.info.name)
                   })
-                  .map(item => (
+                  .map((item, index) => (
                     <li
                       className={ca(
                         `border-l-1 ml-6 h-10  flex cursor-pointer `,
                       )}
-                      key={`Sidebar${index}`}
+                      key={`sidebar_children_${index}`}
                     >
                       <a
                         className={ca(
