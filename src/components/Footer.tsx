@@ -2,7 +2,7 @@ export default function Footer() {
   return (
     <>
       <footer className=" dark:text-white text-gray-900 border-t-1 ml-0 sm:ml-[270px]">
-        <div className="mx-auto w-full p-4 py-6 lg:py-8  max_width">
+        <div className="mx-auto w-full p-4 py-6 lg:py-8">
 
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">

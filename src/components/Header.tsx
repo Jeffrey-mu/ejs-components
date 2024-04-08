@@ -28,7 +28,7 @@ export default function App() {
   ]
 
   return (
-    <Navbar isBordered onMenuOpenChange={setIsMenuOpen} maxWidth="2xl">
+    <Navbar isBordered onMenuOpenChange={setIsMenuOpen} maxWidth="full">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
