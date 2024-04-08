@@ -1,7 +1,3 @@
-.max_width {
-  width: min(1536px, 100% - 30px);
-  margin-inline: auto;
-}
 html, body{
   scroll-behavior: smooth;
 }
@@ -9,19 +5,7 @@ html, body{
 body {
   #root {
     .App {
-      .header {
-        .max_width {
-          display: flex;
-          justify-content: space-between;
-        }
-      }
 
-      .container {
-        flex: 1;
-        margin: 0 auto;
-        width: min(1536px, calc(100% - 40px)) !important;
-        min-height: calc(100vh - (64px + 180px));
-      }
     }
 
   }
