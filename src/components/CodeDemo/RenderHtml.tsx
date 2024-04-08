@@ -11,7 +11,7 @@ import ScreenFull from '@/components/svg/ScreenFull'
 import Pad from '@/components/svg/Pad'
 import Laptop from '@/components/svg/Laptop'
 import MobileSm from '@/components/svg/MobileSm'
-import { flexLayout } from '@/pages/Library'
+import { flexLayout } from '@/components/CodeList'
 // 模拟响应式
 export const screen = [
   {
@@ -101,15 +101,15 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
     const iframe = iframeRef.current
     if (!iframe)
       return
-    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document;
-    const firstChildElement = iframeDocument?.body.firstElementChild;
+    const iframeDocument = iframe.contentDocument || iframe.contentWindow?.document
+    const firstChildElement = iframeDocument?.body.firstElementChild
 
     if (firstChildElement) {
-      const computedStyle = window.getComputedStyle(firstChildElement);
-      const height = parseFloat(computedStyle.height);
-      const marginTop = parseFloat(computedStyle.marginTop);
-      const marginBottom = parseFloat(computedStyle.marginBottom);
-      const totalHeight = height + marginTop + marginBottom;
+      const computedStyle = window.getComputedStyle(firstChildElement)
+      const height = Number.parseFloat(computedStyle.height)
+      const marginTop = Number.parseFloat(computedStyle.marginTop)
+      const marginBottom = Number.parseFloat(computedStyle.marginBottom)
+      const totalHeight = height + marginTop + marginBottom
       setHeight(totalHeight + 5)
     }
   }
@@ -176,7 +176,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                     <CopyBtn value={innerHtml} />
                   </div>
                 </div>
-              )
+                )
               : <></>
           }
 
@@ -215,7 +215,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
                       }}
                     />
                   </div>
-                )
+                  )
                 : <></>
             }
 
@@ -223,7 +223,7 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
 
         </Card>
       </>
-    )
+      )
     : (
       <div className="flex justify-center items-center flex-1 pb-2">
         <div
@@ -235,5 +235,5 @@ export default function App({ html, mode, type, showTools }: RenderHtmlProps) {
           }}
         />
       </div>
-    )
+      )
 }
