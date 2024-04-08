@@ -29,7 +29,10 @@ export default function App(props: { codeList: CompDataType[] }) {
   return (
     <div className="flex gap-5">
       <Sidebar change={handelMenu} list={codeList} active={active} tabs={tabs} />
-      <div className="flex flex-col w-full flex-1 pb-80 ml-0 sm:ml-[250px] sm:w-[calc(100%-270px)] mt-5">
+      <div className="flex flex-col w-full flex-1 pb-80 ml-0 sm:ml-[270px] sm:w-[calc(100%-270px)] mt-5">
+        {
+          !active && <div className='font-bold text-xl text-orange-700'>empty..</div>
+        }
         <section
           className={ca(
             flexLayout.includes(active)

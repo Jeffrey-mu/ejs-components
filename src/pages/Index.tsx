@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { api, header as headers } from '@/lib/constant'
 import type { CompDataType } from '@/components/CodeDemo/index'
 import CodeList from '@/components/CodeList'
-
+import localList from '@/Library/40.json'
 export default function App() {
   const [list, setList] = useState<CompDataType[]>([])
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function App() {
       })
       .catch((err) => {
         console.log(err)
-        setList([])
+        setList(localList)
       })
   }, [])
 

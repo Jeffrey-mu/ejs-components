@@ -22,6 +22,16 @@ export default function App({
     change(value)
     scrollTo({ left: 0, top: 0, behavior: 'smooth' })
   }
+
+  function retract(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.target && (event.target as HTMLElement).tagName === 'svg') {
+      const dataValue = event.currentTarget.getAttribute('data-value');
+      dataValue && change(dataValue === active ? '' : dataValue);
+      scrollTo({ left: 0, top: 0, behavior: 'smooth' })
+    }
+  }
   return (
     <nav className="fixed top-[64px] w-[250px] hidden sm:block max-h-[calc(100vh-64px)] overflow-auto">
       <ul className="h-full box-border bg-content1 outline-none shadow-sm border transition-transform-background flex w-full flex-col p-3 pt-6 CodeDemo mb-3 gap-3 text-yellow-800">
@@ -32,11 +42,13 @@ export default function App({
               <span
                 onClick={handelMenu.bind(null, item)}
                 className={ca(
-                  `${item === active ? 'text-orange-600 font-bold' : ''} w-fullcursor-pointer pl-4 flex text-xl hover:text-orange-600 ml-3 items-center justify-between pr-5`,
+                  `${item === active ? 'text-orange-600 font-bold' : ''} w-fullcursor-pointer pl-4 flex text-xl hover:text-orange-600 ml-3 items-center justify-between pr-5 select-none`,
                 )}
               >
                 {item}
-                <ArrowDown rotate={active === item ? '' : 'rotate-90'} />
+                <div className='cursor-pointer icon-hover' onClick={retract} data-value={item}>
+                  <ArrowDown rotate={active === item ? '' : 'rotate-90'} />
+                </div>
               </span>
               <ul
                 className={ca(
@@ -58,7 +70,7 @@ export default function App({
                     >
                       <a
                         className={ca(
-                          `w-full border-l-1 h-6 pl-6 flex  hover:text-orange-600 cursor-pointer hover:border-orange-500 ml-[-1px]`,
+                          `w-full border-l-1 h-6 pl-6 flex select-none hover:text-orange-600 cursor-pointer hover:border-orange-500 ml-[-1px]`,
                           state.hash?.slice(1) === item.info.name
                             ? 'border-orange-500 text-orange-600 font-bold'
                             : '',
