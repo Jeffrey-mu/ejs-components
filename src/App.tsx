@@ -3,6 +3,8 @@ import Layout from './components/Layout'
 import Index from '@/pages/Index'
 import Library from '@/pages/Library'
 import About from '@/pages/About'
+import PrivacyPolicy from '@/pages/PrivacyPolicy'
+import TermsofUse from '@/pages/TermsofUse'
 
 function App() {
   if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -24,6 +26,8 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/library" element={<Library />} />
             <Route path="/about" element={<About />} />
+            <Route path="/PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/TermsofUse" element={<TermsofUse />} />
           </Route>
         </Routes>
       </BrowserRouter>
